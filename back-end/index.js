@@ -2,7 +2,7 @@ const express = require('express')
 
 //...................................................
 
-const DB = "mongodb://127.0.0.1:27017/"
+const DB = "mongodb://127.0.0.1:27017/inotebook"
 
 const mongoose = require('mongoose');
 
@@ -19,7 +19,7 @@ async function main() {
 const app = express()
 const port = 3000
 
-
+app.use(express.json())
 //avilable routes
 
 app.use('/api/auth',require('./routes/auth'))
