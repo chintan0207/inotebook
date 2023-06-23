@@ -45,21 +45,67 @@ router.post('/createuser', [
         // return token
 
         const data = {
-            user:{
+            user: {
                 id: user.id
             }
         }
+        const JWT_SECRET = "chintanisgood$boy"
+        const authtoken = jwt.sign(data, JWT_SECRET);
 
-        const authtoken = jwt.sign(data, "JWT_SECRET");
-    
-        res.json({authtoken})
+        res.json({ authtoken })
     }
     //catch the errors
     catch (error) {
         console.error(error.message);
-        res.status(500).send("some error occurred")
+        res.status(500).send("internal server error occurred")
 
     }
+})
+
+// Authenticate a user using: POST "api/auth/login".no login required
+
+router.post('/login', [
+
+    check('email', 'Enter valid email').isEmail(),
+    check('password', 'password must be 5 characters').exists(),
+
+], async (req, res) => {
+
+    // if there is error ,return bad request
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+    try {
+        let user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ error: "Please try to login with correct credentials" });
+        }
+
+        const passwordcompare = await bcrypt.compare(password, user.password);
+        if (!passwordcompare) {
+            return res.status(400).json({ error: "Please try to login with correct credentials" });
+        }
+
+        const data = {
+            user: {
+                id: user.id
+            }
+        }
+        const JWT_SECRET = "chintanisgood$boy"
+        const authtoken = jwt.sign(data, JWT_SECRET);
+
+        res.json({ authtoken })
+    }
+    catch(error) {
+
+        console.error(error.message);
+        res.status(500).send("internal server errors occurred")
+    }
+
 })
 
 module.exports = router
