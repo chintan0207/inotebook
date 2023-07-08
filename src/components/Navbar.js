@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom"
+import { FaUserCircle } from 'react-icons/fa';
+
 
 
 const Navbar = (props) => {
@@ -35,7 +37,7 @@ const Navbar = (props) => {
             {!localStorage.getItem('token') ? <form className="d-flex" role="search">
               <Link className='btn btn-primary mx-1' to="/login" role='button'>Login</Link>
               <Link className='btn btn-primary mx-1' to="/signup" role='button'>SignUp</Link>
-            </form> : <button onClick={handleLogout} className='btn btn-primary'>Logout</button>}
+            </form> : <div className='d-flex align-items-center'><Link to="/user"><FaUserCircle className='user' /></Link> <button onClick={handleLogout} className='btn btn-primary'>Logout</button></div>}
           </div>
         </div>
       </nav>

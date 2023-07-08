@@ -9,6 +9,7 @@ import Alert from './components/Alert';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import { useState } from 'react';
+import User from './components/User';
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
     })
     setTimeout(() => {
       setAlert(null);
-    }, 1500);
+    }, 2000);
   }
 
 
@@ -31,17 +32,14 @@ function App() {
         <Router>
           <Navbar name="iNotebook" />
           <Alert alert={alert} />
-          <div className='container'>
-
             <Routes>
               <Route path="/" element={<Home showAlert={showAlert}/>} />
+              <Route path="/user" element={<User/>} />
               <Route path="/about" element={<About showAlert={showAlert} />} />
               <Route path="/login" element={<Login showAlert={showAlert}/>} />
               <Route path="/signup" element={<Signup showAlert={showAlert}/>} />
 
-
             </Routes>
-          </div>
 
         </Router>
       </NoteState>

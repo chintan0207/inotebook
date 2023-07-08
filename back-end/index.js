@@ -3,7 +3,7 @@ var cors = require('cors')
 
 //...................................................
 
-const DB = "mongodb://127.0.0.1:27017/inotebook"
+const DB = "mongodb+srv://chintanInotebook:RF40dUQdfRUbQ5HK@cluster0.wbjuoix.mongodb.net/?retryWrites=true&w=majority"
 
 const mongoose = require('mongoose');
 
@@ -18,7 +18,7 @@ async function main() {
 //.................................................
 
 const app = express()
-const port = 5000 
+const port = process.env.PORT || 5000 
 app.use(cors())
 app.use(express.json())
 //avilable routes

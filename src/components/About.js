@@ -1,12 +1,12 @@
-import { useContext } from 'react'
-import noteContext from '../context/notes/noteContext'
 
 const About = () => {
 
-const c =useContext(noteContext)
 
   return (
-    <div>This is about Page</div>
+    <div className="container">
+      <h2>iNotebook</h2>
+      <h6>iNotebook is a React Application for managing personal notes on the cloud</h6>
+    </div>
   )
 }
 
